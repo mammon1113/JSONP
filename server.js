@@ -39,8 +39,22 @@ if(path =='/main.js'){
   response.setHeader('Content-type', 'text/html; charset=utf-8')
   response.write(string)                 
   response.end()
+}else if(path ==='/pay' && method.toUpperCase() === 'POST'){
+  var amount = fs.readFileSync('./db','utf8')
+  var newamount = amount - 1
+  if(Math.random()>0.5){
+    fs.writeFileSync('db',newamount)
+    response.setHeader('Content-type', 'text/html; charset=utf-8')
+    response.write('success')     
+  }else{
+    response.setHeader('Content-type', 'text/html; charset=utf-8')
+    response.write('fall')   
+  }           
+  response.end()
 }else{
   response.statusCode = 404
+  response.setHeader('Content-type', 'text/html; charset=utf-8')
+  response.write('找不到对应地址')
   response.end()
 }
 
