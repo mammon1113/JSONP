@@ -39,16 +39,18 @@ if(path =='/main.js'){
   response.setHeader('Content-type', 'text/html; charset=utf-8')
   response.write(string)                 
   response.end()
-}else if(path ==='/pay' && method.toUpperCase() === 'POST'){
+}else if(path ==='/pay'){
   var amount = fs.readFileSync('./db','utf8')
   var newamount = amount - 1
   if(Math.random()>0.5){
     fs.writeFileSync('db',newamount)
-    response.setHeader('Content-type', 'text/html; charset=utf-8')
-    response.write('success')     
+    response.setHeader('Content-type', 'image/jpg')
+    response.statusCode = 200
+    response.write(fs.readFileSync('./dog.jpg'))     
   }else{
     response.setHeader('Content-type', 'text/html; charset=utf-8')
-    response.write('fall')   
+    response.statusCode = 400
+    response.write('fail')   
   }           
   response.end()
 }else{

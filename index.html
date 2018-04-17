@@ -7,18 +7,27 @@
 </head>
 <body>
 	<h5>您的账户余额是 <span id="amount">&&&amount&&&</span></h5>
-	<form action="/pay" method="post">
-		<input type="submit" value="付款">
-	</form>
-<!-- 	<button id="button">付款</button>
+	<button id="button">付款</button>
 	<script>
 		button.addEventListener('click',function(){
-			let n = amount.innerText;
-			let number = parseInt(n,10);
-			let newnumber = number - 1;
-			amount.innerText = newnumber;
+			let image = document.createElement('img')
+			image.src = '/pay'
+			image.onload = function(){
+				alert('打钱成功')
+				amount.innerText = amount.innerText - 1
+			}
+			image.onerror = function(){alert('打钱失败')}
+			// let n = amount.innerText;
+			// let number = parseInt(n,10);
+			// let newnumber = number - 1;
+			// amount.innerText = newnumber;
 		})
-	</script> -->
+	</script>
+
+<!-- 	<form action="/pay" method="post">
+		<input type="submit" value="付款">
+	</form> -->
+
 
 
 
