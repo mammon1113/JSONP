@@ -47,9 +47,7 @@ if(path =='/main.js'){
     response.setHeader('Content-type', 'application/javascript')
     response.statusCode = 200
     response.write(`
-      alert("打钱成功")
-      amount.innerText = amount.innerText - 1
-      `)     
+      ${query.callbackname}.call(undefined,'success')`)     
   }else{
     response.setHeader('Content-type', 'text/html; charset=utf-8')
     response.statusCode = 400

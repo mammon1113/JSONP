@@ -9,9 +9,18 @@
 	<h5>您的账户余额是 <span id="amount">&&&amount&&&</span></h5>
 	<button id="button">付款</button>
 	<script>
+		window.xxx = function(result){
+			if(result === 'success'){
+				alert('result')
+				amount.innerText = amount.innerText - 1
+			}else{}
+			
+		}
+
+
 		button.addEventListener('click',function(){
 			let script = document.createElement('script')
-			script.src = 'http://luckjeck2.com:8002/pay'
+			script.src = 'http://luckjeck2.com:8002/pay?callbackName=xxx'
 			document.body.appendChild(script)
 			script.onload = function(e){
 				e.currentTarget.remove()
