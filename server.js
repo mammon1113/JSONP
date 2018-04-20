@@ -44,9 +44,12 @@ if(path =='/main.js'){
   var newamount = amount - 1
   if(Math.random()>0.5){
     fs.writeFileSync('db',newamount)
-    response.setHeader('Content-type', 'image/jpg')
+    response.setHeader('Content-type', 'application/javascript')
     response.statusCode = 200
-    response.write(fs.readFileSync('./dog.jpg'))     
+    response.write(`
+      alert("打钱成功")
+      amount.innerText = amount.innerText - 1
+      `)     
   }else{
     response.setHeader('Content-type', 'text/html; charset=utf-8')
     response.statusCode = 400

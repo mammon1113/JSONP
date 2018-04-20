@@ -10,13 +10,16 @@
 	<button id="button">付款</button>
 	<script>
 		button.addEventListener('click',function(){
-			let image = document.createElement('img')
-			image.src = '/pay'
-			image.onload = function(){
-				alert('打钱成功')
-				amount.innerText = amount.innerText - 1
+			let script = document.createElement('script')
+			script.src = 'http://luckjeck2.com:8002/pay'
+			document.body.appendChild(script)
+			script.onload = function(e){
+				e.currentTarget.remove()
 			}
-			image.onerror = function(){alert('打钱失败')}
+			script.onerror = function(e){
+				alert('打钱失败')
+				e.currentTarget.remove()
+			}
 			// let n = amount.innerText;
 			// let number = parseInt(n,10);
 			// let newnumber = number - 1;
