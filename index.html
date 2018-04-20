@@ -9,19 +9,17 @@
 	<h5>您的账户余额是 <span id="amount">&&&amount&&&</span></h5>
 	<button id="button">付款</button>
 	<script>
-		window.xxx = function(result){
-			if(result === 'success'){
-				alert('result')
-				amount.innerText = amount.innerText - 1
-			}else{}
-			
-		}
-
-
-		button.addEventListener('click',function(){
+		button.addEventListener('click',function(e){
+			let functionName = 'jeck1'+parseInt(Math.random()*100000,10)
 			let script = document.createElement('script')
-			script.src = 'http://luckjeck2.com:8002/pay?callbackName=xxx'
+			script.src = 'http://luckjeck2.com:8002/pay?callback='+ functionName
 			document.body.appendChild(script)
+			window[functionName] = function(result){
+				if(result === 'success'){
+					alert('success')
+					amount.innerText = amount.innerText - 1
+				}else{}
+			}
 			script.onload = function(e){
 				e.currentTarget.remove()
 			}
@@ -29,24 +27,10 @@
 				alert('打钱失败')
 				e.currentTarget.remove()
 			}
-			// let n = amount.innerText;
-			// let number = parseInt(n,10);
-			// let newnumber = number - 1;
-			// amount.innerText = newnumber;
 		})
 	</script>
 
-<!-- 	<form action="/pay" method="post">
-		<input type="submit" value="付款">
-	</form> -->
-
-
-
-
-
-
-
-
+		
 
 
 

@@ -10,11 +10,11 @@ if(!port){
 
 var server = http.createServer(function(request, response){
   var parsedUrl = url.parse(request.url, true)
-  var path = request.url 
-  var query = ''
-  if(path.indexOf('?') >= 0){ query = path.substring(path.indexOf('?')) }
-  var pathNoQuery = parsedUrl.pathname
-  var queryObject = parsedUrl.query
+  var pathWithQuery = request.url 
+  var queryString = ''
+  if(pathWithQuery.indexOf('?') >= 0){ queryString = pathWithQuery.substring(pathWithQuery.indexOf('?')) }
+  var path = parsedUrl.pathname
+  var query = parsedUrl.query
   var method = request.method
 
   /******** 从这里开始看，上面不要看 ************/
@@ -43,16 +43,17 @@ if(path =='/main.js'){
   var amount = fs.readFileSync('./db','utf8')
   var newamount = amount - 1
   if(Math.random()>0.5){
-    fs.writeFileSync('db',newamount)
-    response.setHeader('Content-type', 'application/javascript')
-    response.statusCode = 200
-    response.write(`
-      ${query.callbackname}.call(undefined,'success')`)     
-  }else{
-    response.setHeader('Content-type', 'text/html; charset=utf-8')
-    response.statusCode = 400
-    response.write('fail')   
-  }           
+  fs.writeFileSync('db',newamount)
+  response.setHeader('Content-type', 'application/javascript')
+  response.statusCode = 200
+  response.write(`
+    ${query.callback}.call(undefined,'success')
+  `)           
+}else{
+  response.setHeader('Content-type', 'application/javascript')
+  response.statusCode = 400
+  response.write('fall')
+}
   response.end()
 }else{
   response.statusCode = 404
